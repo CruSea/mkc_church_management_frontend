@@ -1,0 +1,106 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <!--
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-warning card-header-icon">
+            <div class="card-icon">
+              <i class="fa fa-newspaper-o"></i>
+            </div>
+            <p class="card-category">Published Feeds</p>
+            <h3 class="card-title">{{main_dashboard_data.published_feeds}}
+              <small></small>
+            </h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons text-danger">list</i>
+              <a>Published News Feeds</a>
+            </div>
+          </div>
+        </div>
+      </div>
+-->
+<!--      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">mobile_friendly</i>
+            </div>
+            <p class="card-category">Mobile Clients</p>
+            <h3 class="card-title">{{main_dashboard_data.mobile_clients}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">mobile_friendly</i> Mobile App Users
+            </div>
+          </div>
+        </div>
+      </div>
+-->
+
+<!--
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-danger card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">info_outline</i>
+            </div>
+            <p class="card-category">Likes and Comments</p>
+            <h3 class="card-title">{{main_dashboard_data.users_likes}} | {{main_dashboard_data.users_comments}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">local_offer</i> Mobile Users Likes And Comments Count
+            </div>
+          </div>
+        </div>
+      </div>-->
+
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-info card-header-icon">
+            <div class="card-icon">
+              <i class="fa fa-user-secret"></i>
+            </div>
+            <p class="card-category">System Admins</p>
+            <h3 class="card-title">{{main_dashboard_data.system_admins}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">person</i> System Administrators
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="col-md-12">
+          <div class="card card-chart">
+            <div class="card-header card-header-success">
+              <div class="ct-chart" id="bar_chart" style="height: 300px"></div>
+            </div>
+            <div class="card-body">
+              <button mat-raised-button type="button" matTooltip="Move Dashboard To The Left"
+                      [matTooltipPosition]="'above'" (click)="moveDashboardData(1);"
+                      class="btn btn-primary btn-link btn-md btn-just-icon pull-right">
+                <i class="fa fa-arrow-circle-right"></i>
+              </button>
+              <button mat-raised-button type="button" matTooltip="Move Dashboard To The Right"
+                      [matTooltipPosition]="'above'" (click)="moveDashboardData(-1);"
+                      class="btn btn-primary btn-link btn-md btn-just-icon pull-left">
+                <i class="fa fa-arrow-circle-left"></i>
+              </button>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons">access_time</i> updated 4 minutes ago
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '5px' }"></ngx-loading>

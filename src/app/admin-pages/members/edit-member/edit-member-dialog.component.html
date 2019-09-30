@@ -1,0 +1,458 @@
+<h4>የአባላት መረጃ ያዘምኑ </h4>
+<mat-dialog-content>
+  <form action="" class="inset" style="margin: 10px;">
+    <br>
+    <div class="col-sm-12">
+      <p><small>የግል መረጃ ዝርዝር</small></p>
+      <mat-accordion>
+        <mat-expansion-panel [expanded]="panel1"
+                             (opened)="panel1_status(true)"
+                             (closed)="panel1_status(false)">
+
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              የአባላት የግል መረጃ
+            </mat-panel-title>
+            <mat-panel-description>
+              የግል መረጃ ለማከል እዚህ ጠቅ ያድርጉ
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+
+          <div class="row">
+            <div class="col-sm-3">
+              <mat-card >
+                <img  *ngIf="show_pic" [hidden]="!selected_member.photo_url" mat-card-image  class="img-article" height="180" width="180" [src] ="selected_member.photo_url" alt="Image_prayer">
+                <button  *ngIf="show_pic" mat-raised-button (click)=" this.show_pic = false; photo_taken = false;">አዲስ ፎቶ አንሳ</button>
+                <!--<button  *ngIf="!show_pic" (click)=" this.show_pic = true;">Use The Older</button>-->
+                <div [hidden]="!photo_taken || show_pic ">
+                  <canvas  #canvas id="canvas" width="180" height="180" class="form-group"></canvas>
+                </div>
+                <!--<div class="col-sm-1">-->
+                <div id="app"  [hidden]="show_pic" >
+                  <div [hidden]="photo_taken">
+                    <video #video id="video" width="180" height="180" autoplay></video>
+                  </div>
+                  <div>
+                    <button id="snap" mat-raised-button (click)="capture()">አንሳ</button>
+                    <button id="cancel" mat-raised-button (click)=" this.show_pic = true;">ይቅር </button>
+                  </div>
+                </div>
+              </mat-card>
+              <br>
+            </div>
+            <div class="col-sm-2">
+              <mat-form-field>
+                <input matInput   placeholder="ሙሉ ስም" name="full_name" [(ngModel)]="selected_member.full_name" >
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput [readonly]="!editable"   [matDatepicker]="picker2" placeholder="የልደት ቀን"  name="birth_day" [(ngModel)]="selected_member.birth_day">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+
+
+              <mat-form-field>
+                <input matInput placeholder="የልደት ቦታ" name="birth_place"
+                       [(ngModel)]="selected_member.birth_place">
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-select placeholder="ፆታ"  name="gender" [(ngModel)]="selected_member.gender">
+                  <mat-option value="ወንድ">ወንድ</mat-option>
+                  <mat-option value="ሴት">ሴት</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </div>
+            <div class="col-sm-2">
+              <mat-form-field>
+                <input matInput   placeholder="ኢሜይል" name="email" [(ngModel)]="selected_member.email" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput  placeholder="ስልክ ቁጥር" name="phone_cell" [(ngModel)]="selected_member.phone_cell" required pattern='^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$'>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-2">
+              <mat-form-field>
+                <mat-select placeholder="ዜግነት" name="nationality" [(ngModel)]="selected_member.nationality" >
+                  <mat-option *ngFor="let list of countries.list" value="{{list.nationality}}">{{list.nationality}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput  placeholder="ከተማ" name="city" [(ngModel)]="selected_member.city" >
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select placeholder="የጋብቻ ሁኔታ"  name="marital_status" [(ngModel)]="selected_member.marital_status">
+                  <mat-option value="Mar">ያገባ</mat-option>
+                  <mat-option value="Sin">ያላገባ</mat-option>
+                  <mat-option value="Sep">የተፋታ</mat-option>
+                  <mat-option value="Wid">ባሏ የሞተ</mat-option>
+                  <mat-option value="Div">የተፋታ</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </div>
+            <div class="col-sm-3">
+              <mat-form-field>
+                <input matInput  placeholder="ስራ" name="occupation" [(ngModel)]="selected_member.occupation" >
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-select placeholder="የትምህርት ደረጃ"  name="education_level" [(ngModel)]="new_member.education_level">
+                  <mat-option value="elementary">የመጀመሪያ ደረጃ</mat-option>
+                  <mat-option value="secondary">ሁለተኛ ደረጃ</mat-option>
+                  <mat-option value="diploma"> ዲፕሎማ</mat-option>
+                  <mat-option value="degree"> የመጀመሪያ ዲግሪ</mat-option>
+                  <mat-option value="masters"> ሁለተኛ ዲግሪ</mat-option>
+                  <mat-option value="phd">ሶስተኛ ዲግሪ</mat-option>
+                  <mat-option value="other">ሌላ</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </div>
+            <div class="col-sm-2">
+              <mat-form-field>
+                <input matInput  placeholder="Adress"  name="address" [(ngModel)]="selected_member.address">
+              </mat-form-field>
+            </div>
+            <div class="col-sm-2">
+              <mat-form-field>
+                <input matInput [readonly]="!editable"  [matDatepicker]="picker4" placeholder="የመዳን ቀን"  name="salvation_date" [(ngModel)]="selected_member.salvation_date">
+                <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                <mat-datepicker #picker4></mat-datepicker>
+              </mat-form-field>
+
+            </div>
+            <div class="col-sm-5">
+              <br>
+              <mat-radio-group name="is_baptized" [(ngModel)]="selected_member.is_baptized">
+                <p class="d-inline"><small>በውሃ ጥምቀጥ ተጠምቀዋል?</small></p>&nbsp;
+                <mat-radio-button value="አዎ">አዎ</mat-radio-button>&nbsp;
+                <mat-radio-button value="አይ">አይ</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div class="col-sm-3">
+              <mat-form-field>
+                <input matInput [readonly]="!editable"  [matDatepicker]="picker6" placeholder="የጥምቀት ቀን"
+                       name="baptized_date" [(ngModel)]="selected_member.baptized_date">
+                <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+                <mat-datepicker #picker6></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+
+
+
+          <div class="form-label-group">
+            <br>
+            <button mat-raised-button type="button" (click)="updateMemberInfo();" class="btn btn-primary pull-right">የአባላት መረጃ አዘምን</button>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <div class="col-sm-12">
+      <p><small>የትዳር ጓደኛ መረጃ ዝርዝር</small></p>
+      <mat-accordion>
+        <mat-expansion-panel
+                [expanded]="panel2"
+                (opened)="panel2_status(true)"
+                (closed)="panel2_status(false)" >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              የአባላት የትዳር ጓደኛ መረጃ
+            </mat-panel-title>
+            <mat-panel-description>
+              የትዳር ጓደኛን መረጃ ለመጨመር እዚህ ጠቅ ያድርጉ
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col-sm-12">
+              <p><small>የትዳር ጓደኛ መረጃ ዝርዝር</small></p>
+            </div>
+            <div class="col-sm-3">
+              <mat-form-field>
+                <input matInput  placeholder="ሙሉ ስም" name="spouse_full_name"  [(ngModel)]="new_member_spouse_info.full_name" required>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput   [readonly]="!editable" [matDatepicker]="picker" placeholder="የልደት ቀን"  name="spouse_birth_day" [(ngModel)]="new_member_spouse_info.birth_day">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-select  placeholder="ፆታ"  name="spouse_gender" [(ngModel)]="new_member_spouse_info.gender">
+                  <mat-option value="ወንድ">ወንድ</mat-option>
+                  <mat-option value="ሴት">ሴት</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </div>
+            <div class="col-sm-3">
+              <mat-form-field>
+                <input matInput   placeholder="ኢሜይል" name="spouse_email" [(ngModel)]="new_member_spouse_info.email" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput   placeholder="ስልክ ቁጥሬ" name="spouse_phone_cell" [(ngModel)]="new_member_spouse_info.phone_cell" required pattern='^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$'>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+              <mat-form-field>
+                <mat-select placeholder="ዜግነት" name="spouse_nationality" [(ngModel)]="new_member_spouse_info.nationality"  >
+                  <mat-option *ngFor="let list of countries.list" value="{{list.nationality}}">{{list.nationality}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput   placeholder="ከተማ" name="spouse_city" [(ngModel)]="new_member_spouse_info.city" >
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput  placeholder="አድራሻ"  name="spouse_address" [(ngModel)]="new_member_spouse_info.address">
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+              <mat-form-field>
+                <input matInput   placeholder="ስራ" name="spouse_occupation" [(ngModel)]="new_member_spouse_info.occupation" >
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput  placeholder="የስራ ሃላፊነ"  name="spouse_employment_position" [(ngModel)]="new_member_spouse_info.employment_position" >
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="የስራ ቦታ"  name="souse_employment_place" [(ngModel)]="new_member_spouse_info.employment_place">
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+              <mat-form-field>
+                <input matInput  [readonly]="!editable" [matDatepicker]="picker5" placeholder="የመዳን ቀን"  name="spouse_salvation_date" [(ngModel)]="new_member_spouse_info.salvation_date">
+                <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                <mat-datepicker #picker5></mat-datepicker>
+              </mat-form-field>
+ት
+            </div>
+            <div class="col-sm-6">
+              <br>
+              <mat-radio-group name="spouse_is_baptized" [(ngModel)]="new_member_spouse_info.is_baptized">
+                <p class="d-inline">በውሃ ጥምቀት ተጠምቀዋል?</p>&nbsp;
+                <mat-radio-button value="አዎ">አዎ</mat-radio-button>&nbsp;
+                <mat-radio-button value="አይ">አይ</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div class="col-sm-3">
+              <mat-form-field>
+                <mat-form-field>
+                  <input matInput [readonly]="!editable" [matDatepicker]="pickerSpBapDa" placeholder="የጥምቀት ቀን" name="baptized_date"
+                         [(ngModel)]="new_member_spouse_info.baptized_date">
+                  <mat-datepicker-toggle matSuffix [for]="pickerSpBapDa"></mat-datepicker-toggle>
+                  <mat-datepicker #pickerSpBapDa></mat-datepicker>
+                </mat-form-field>
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-label-group">
+            <br>
+            <button mat-raised-button type="button" *ngIf="is_spouse" (click)="updateSpouseInfo();" class="btn btn-primary pull-right">የትዳር ጓደኛ መረጃን አዘምን</button>
+            <button mat-raised-button type="button" *ngIf="!is_spouse" (click)="addSpouseInfo(new_member_spouse_info);" class="btn btn-primary pull-right">የትዳር ጓደኛ መረጃ ያክሉ</button>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col-sm-12" *ngIf="is_children">
+      <p><small>የልጆች መረጃ ዝርዝር</small></p>
+      <mat-accordion>
+        <mat-expansion-panel [expanded]="panel3" (opened)="panel3_status(true)"
+                             (closed)="panel3_status(false)">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              የአባላት ልጆች መረጃ
+            </mat-panel-title>
+            <mat-panel-description>
+              የልጆችን መረጃ ለመጨመር እዚህ ጠቅ ያድርጉ
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col-sm-12">
+              <p><small>የልጆች መረጃ ዝርዝር</small></p>
+            </div>
+            <div class="col-sm-12" [hidden]="child_update_state">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover table-striped table-condensed">
+                    <thead class=" text-primary">
+                    <th> ቁጥር </th>
+                    <th> ሙሉ ስ </th>
+                    <th> የልደት ቀን </th>
+                    <th> ፆታ </th>
+                    <!--<th> Action </th>-->
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let child of selected_member_children_info; let i = index" class="zoom" style="cursor: pointer;">
+                      <td> {{ i + 1}} </td>
+                      <td (click)="edit(child)"> <strong>{{child.full_name}}</strong></td>
+                      <td (click)="edit(child)"> {{child.birthday}} </td>
+                      <td (click)="edit(child)"> {{child.gender}} </td>
+                      <td class="td-actions">
+                      <button mat-raised-button type="button" matTooltip="Edit Child Info"
+                      [matTooltipPosition]="'above'" (click)="edit(child)"
+                      class="btn btn-danger btn-link btn-sm btn-just-icon">
+                      <i class="material-icons">edit</i>
+                      </button>
+                        <button mat-raised-button type="button" matTooltip="Remove Child "
+                                [matTooltipPosition]="'above'" (click)="removeChild(child)"
+                                class="btn btn-danger btn-link btn-sm btn-just-icon">
+                          <i class="material-icons">close</i>
+                        </button>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12">
+            <mat-tab-group>
+              <mat-tab label="ልጅ" *ngIf="child_update_state" >
+                <mat-form-field>
+                  <input matInput placeholder="ሙሉ ስም" name="child_full_name"
+                         [(ngModel)]="selected_member_child.full_name" required>
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput [matDatepicker]="pickeru" placeholder="የልደት ቀን"
+                         name="child_birth_day" [(ngModel)]="selected_member_child.birthday">
+                  <mat-datepicker-toggle matSuffix [for]="pickeru"></mat-datepicker-toggle>
+                  <mat-datepicker #pickeru></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-select placeholder="ፆታ" name="gender" [(ngModel)]="selected_member_child.gender">
+                    <mat-option value="ወንድ">ወንድ</mat-option>
+                    <mat-option value="ሴት">ሴት</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <div class="form-label-group">
+                  <br>
+                  <button mat-raised-button type="button"  (click)="updateChildInfo(selected_member_child);" class="btn btn-primary pull-right">የልጆችን መረጃ አዘምን</button>
+                  <button mat-raised-button type="button" id="cancel" class="btn btn-default pull-right" (click)="child_update_state=!child_update_state">ይቅር </button>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+            </div>
+          </div>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col-sm-12" *ngIf="!is_children">
+      <p><small>የልጆች መረጃ ዝርዝር</small></p>
+      <mat-accordion>
+        <mat-expansion-panel [expanded]="panel3" (opened)="panel3_status(true)"
+                             (closed)="panel3_status(false)">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              የአባላት ልጆች መረጃ
+            </mat-panel-title>
+            <mat-panel-description>
+              የልጆችን መረጃ ለመጨመር እዚህ ጠቅ ያድርጉ
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col-sm-12">
+              <p><small>የልጆች መረጃ ዝርዝር</small></p>
+            </div>
+            <div class="col-sm-12">
+            <mat-tab-group>
+              <mat-tab  label="Child"  >
+                <mat-form-field>
+                  <input matInput placeholder="ሙሉ ስም" name="child2_full_name"
+                         [(ngModel)]="new_member_children_info.full_name" required>
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput   [readonly]="!editable" [matDatepicker]="pickerchildnew" placeholder="የልደት ቀን"
+                         name="child2_birth_day" [(ngModel)]="new_member_children_info.birthday">
+                  <mat-datepicker-toggle matSuffix [for]="pickerchildnew"></mat-datepicker-toggle>
+                  <mat-datepicker #pickerchildnew></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-select placeholder="ፆታ" name="child2_gender" [(ngModel)]="new_member_children_info.gender">
+                    <mat-option value="ወንድ">ወንድ</mat-option>
+                    <mat-option value="ሴት">ሴት</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-tab>
+            </mat-tab-group>
+            </div>
+          </div>
+          <div class="form-label-group">
+            <br>
+            <button mat-raised-button type="button"  (click)="addChildInfo();" class="btn btn-primary pull-right">የሕፃን መረጃ ያክሉ</button>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <div class="col-sm-12">
+      <p><small>የቀደመችው የቤተ ክርስቲያን መረጃ ዝርዝር</small></p>
+      <mat-accordion>
+        <mat-expansion-panel  [expanded]="panel4" (opened)="panel4_status(true)"
+                              (closed)="panel4_status(false)">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              የአባላት የቀድሞ የቤተክርስቲያን መረጃ
+            </mat-panel-title>
+            <mat-panel-description>
+              የአባላት የቀድሞውን የቤተክርስቲያን መረጃ ለማከል እዚህ ጠቅ ያድርጉ
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col-sm-12">
+              <p><small>የቀደመችው የቤተ ክርስቲያን መረጃ ዝርዝር</small></p>
+            </div>
+            <div class="col-sm-3">
+              <mat-card >
+                <!--<mat-card-title>-->
+                <img  mat-card-image  class="img-article" height="250" width="250" [src] ="new_member_previous_church_info.image_url" alt="Image_previous church">
+                <!--</mat-card-title>-->
+              </mat-card>
+              <br>
+            </div>
+            <div class="col-sm-9">
+              <mat-form-field>
+                <input matInput  placeholder="የቤተክርስቲያን ስም" name="church_name"  [(ngModel)]="new_member_previous_church_info.church_name" >
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput  placeholder="የለቀቁበት ምክንያት" name="leaving_reason"  [(ngModel)]="new_member_previous_church_info.leaving_reason" >
+              </mat-form-field>
+              <mat-radio-group name="was_member" [(ngModel)]="new_member_previous_church_info.was_member">
+                <p>አባል ነበሩ?</p>
+                <mat-radio-button value="አዎ">አዎ</mat-radio-button>&nbsp;
+                <mat-radio-button value="አይ">አይ</mat-radio-button>
+              </mat-radio-group>
+              <mat-form-field>
+                <input matInput  placeholder="ቆይታ" name="duration"  [(ngModel)]="new_member_previous_church_info.duration" >
+              </mat-form-field>
+              <div class="form-label-group">
+                <label>የመሸኛ ደብዳቤ ምስል አያይዝ</label>
+                <input class="form-control" placeholder="የመሸኛ ደብዳቤ ምስል" type="file" name="selected_file" id="selected_file_id" (change)="fileUploadEvent($event)">
+              </div>
+
+            </div>
+
+          </div>
+          <div class="form-label-group">
+            <br>
+            <button mat-raised-button type="button" *ngIf="is_church" (click)="updatePreviousChurchInfo();" class="btn btn-primary pull-right">የቀድሞውን የቤተክርስቲያን መረጃ ያዘምኑ</button>
+            <button mat-raised-button type="button" *ngIf="!is_church" (click)="addPreviousChurchInfo(new_member_previous_church_info);" class="btn btn-primary pull-right">የቀድሞውን የቤተክርስቲያን መረጃ ይጨምሩ</button>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </form>
+</mat-dialog-content>
+<div class="form-label-group">
+  <br>
+  <button mat-raised-button type="button" (click)="cancel();" class="btn btn-default pull-right">ዝጋ</button>
+  <button mat-raised-button type="button" (click)="cancel();" class="btn btn-default pull-right">ጨርስ</button>
+</div>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '5px' }"></ngx-loading>
