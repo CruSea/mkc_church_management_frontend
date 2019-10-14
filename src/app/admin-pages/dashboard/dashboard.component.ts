@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.bar_chart_option = {
             high: 100,
             low: 0,
-            scaleMinSpace: 5,
+            scaleMinSpace: 20,
             seriesBarDistance: 10,
             onlyInteger: true,
             showArea: true,
@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public updateChartData() {
         console.log('update CHART', this.dashboard_data);
         this.bar_chart_chart_object.series = [this.dashboard_data.users_count];
-        this.bar_chart_chart_object.labels = this.dashboard_data.usage_date;
+        this.bar_chart_chart_object.labels = this.dashboard_data.member_date;
         this.bar_chart_option.high = Math.max.apply(Math, this.dashboard_data.users_count);
         this.bar_chart = new Chartist.Bar('#bar_chart', this.bar_chart_chart_object, this.bar_chart_option);
     }

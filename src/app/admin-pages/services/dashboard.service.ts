@@ -145,7 +145,7 @@ export class DashboardService {
     }
 
     public getDailyUsersDashboardData(num: number) {
-        this.httpService.sendGetRequest('daily_mobile_user_chart/' + num + '?token=' + this.authService.getUserToken())
+        this.httpService.sendGetRequest('daily_member_usage_chart/' + num + '?token=' + this.authService.getUserToken())
             .subscribe(
                 data => {
                     this.processGetMobileUserChartData(data);
@@ -158,8 +158,8 @@ export class DashboardService {
     }
 
     public processGetMobileUserChartData(mobile_user_data: any) {
-        if (mobile_user_data && mobile_user_data.status && mobile_user_data.users_usage_data) {
-            this.DashboardUsersDailyDataEmitter.emit(mobile_user_data.users_usage_data);
+        if (mobile_user_data && mobile_user_data.status && mobile_user_data.users_member_data) {
+            this.DashboardUsersDailyDataEmitter.emit(mobile_user_data.users_member_data);
         }
     }
 }

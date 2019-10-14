@@ -129,11 +129,11 @@ export class ChartObject {
 export class DashboardListData {
     public start_date: string;
     public users_count: number[];
-    public usage_date: string[];
+    public member_date: string[];
     constructor() {
         this.start_date = '';
         this.users_count = [];
-        this.usage_date = [];
+        this.member_date = [];
     }
 }
 
