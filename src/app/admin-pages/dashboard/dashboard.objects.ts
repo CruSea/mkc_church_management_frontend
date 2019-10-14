@@ -38,17 +38,15 @@ export class ChartData {
 }
 
 export class MainDashboard {
-    public published_feeds: number;
-    public mobile_clients: number;
-    public system_admins: number;
-    public users_likes: number;
-    public users_comments: number;
+    public all_members: number;
+    public all_team: number;
+    public all_team_members: number;
+    public all_system_users: number;
     constructor() {
-        this.published_feeds = 0;
-        this.mobile_clients = 0;
-        this.system_admins = 0;
-        this.users_likes = 0;
-        this.users_comments = 0;
+        this.all_members = 0;
+        this.all_team = 0;
+        this.all_team_members = 0;
+        this.all_system_users = 0;
     }
 }
 
@@ -66,14 +64,26 @@ export class FeedsDashboard {
 }
 export class MemberDashboard {
     public all_members: number;
-    public all_member_requests: number;
-    public approved_memberships: number;
+    public male_members: number;
+    public female_members: number;
     constructor() {
         this.all_members = 0;
-        this.all_member_requests = 0;
-        this.approved_memberships = 0;
+        this.male_members = 0;
+        this.female_members = 0;
     }
 }
+
+export class TeamDashboard {
+    public team_members: number;
+    public team_leaders: number;
+    public team_main_leaders: number;
+    constructor() {
+        this.team_members = 0;
+        this.team_leaders = 0;
+        this.team_main_leaders = 0;
+    }
+}
+
 export class PrayerRequestDashboard {
     public prayer_requests: number;
     public prayer_requests_replied: number;

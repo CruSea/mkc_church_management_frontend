@@ -5,11 +5,15 @@
         <div class="card card-stats">
           <div class="card-header card-header-warning card-header-icon">
             <div class="card-icon">
-              <i class="fa fa-newspaper-o"></i>
+              <i class="material-icons">group</i>
             </div>
-            <p class="card-category">አባላት</p>
+            <p class="card-category">
+              አባላት
+            </p>
             <h3 class="card-title"> {{dashboard_member_data.all_members}}
-              <small></small>
+              <small>
+
+              </small>
             </h3>
           </div>
           <div class="card-footer">
@@ -21,19 +25,19 @@
         </div>
       </div>
 
-<!--      <div class="col-lg-4 col-md-6 col-sm-6">
+      <div class="col-lg-4 col-md-6 col-sm-6">
         <div class="card card-stats">
           <div class="card-header card-header-success card-header-icon">
             <div class="card-icon">
-              <i class="material-icons">assignment</i>
+              <i class="fa fa-user-o"></i>
             </div>
-            <p class="card-category"> Requests</p>
-            <h3 class="card-title"> {{dashboard_member_data.all_member_requests}}</h3>
+            <p class="card-category"> ወንድ አባላት</p>
+            <h3 class="card-title"> {{dashboard_member_data.male_members}}</h3>
             <small></small>
           </div>
           <div class="card-footer">
             <div class="stats">
-              <i class="material-icons">assignment</i>Total Number Of Member Requests
+              <i class="material-icons">assignment</i>ጠቅላላ የወንድ አባላት ብዛት
             </div>
           </div>
         </div>
@@ -43,18 +47,18 @@
         <div class="card card-stats">
           <div class="card-header card-header-danger card-header-icon">
             <div class="card-icon">
-              <i class="material-icons">thumb_up</i>
+              <i class="fa fa-user-o"></i>
             </div>
-            <p class="card-category"> Approved</p>
-            <h3 class="card-title">{{dashboard_member_data.approved_memberships}}</h3>
+            <p class="card-category"> ሴት አባላት</p>
+            <h3 class="card-title">{{dashboard_member_data.female_members}}</h3>
           </div>
           <div class="card-footer">
             <div class="stats">
-              <i class="material-icons">thumb_up</i>Total Number Of Approved Members
+              <i class="material-icons">thumb_up</i>ጠቅላላ የሴት አባላት ብዛት
             </div>
           </div>
         </div>
-      </div>-->
+      </div>
 
     </div>
 
@@ -64,7 +68,7 @@
           <div class="card-header card-header-tabs card-header-warning">
             <div class="nav-tabs-navigation">
               <div class="nav-tabs-wrapper">
-                <span class="nav-tabs-title">Filters:</span>
+                <span class="nav-tabs-title">መርጠክ አሳይ:</span>
                 <ul class="nav nav-tabs" data-tabs="tabs">
                   <li class="nav-item">
                     <a mat-button class="nav-link" (click)="getMembers()" data-toggle="tab">

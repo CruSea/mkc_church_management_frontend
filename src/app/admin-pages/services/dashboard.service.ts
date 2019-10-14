@@ -6,7 +6,7 @@ import {
     FeedsDashboard,
     MainDashboard,
     MemberDashboard,
-    MobileUserChartData, PartnerDashboard
+    MobileUserChartData, PartnerDashboard, TeamDashboard
 } from '../dashboard/dashboard.objects';
 
 class PrayerRequestDashboard {
@@ -22,6 +22,7 @@ export class DashboardService {
     public PartnerDashboardDataEmitter = new EventEmitter<PartnerDashboard[]>();
     public DashboardUsersDailyDataEmitter = new EventEmitter<DashboardListData>();
     public MemberDashboardDataEmitter = new EventEmitter<MemberDashboard>();
+    public TeamDashboardDataEmitter = new EventEmitter<TeamDashboard>();
     // public PrayerRequestDashboardDataEmitter = new EventEmitter<PrayerRequestDashboard[]>();
     public MobileUserChartDataListEmitter = new EventEmitter<MobileUserChartData>();
 
@@ -83,6 +84,27 @@ export class DashboardService {
             this.MemberDashboardDataEmitter.emit(dash_data.member_dashboard);
         }
     }
+
+
+    public getTeamDashboardData() {
+        return this.httpService.sendGetRequest('team_dashboard?team_id=' + this.authService.getSelectedTeam() + '&token=' + this.authService.getUserToken())
+            .subscribe(
+                data => {
+                    this.processGetTeamDashboardData(data);
+                    console.log('users: ', data)
+                },
+                error => {
+                    console.log(error);
+                },
+            );
+    }
+
+    private processGetTeamDashboardData(dash_data) {
+        if (dash_data && dash_data.status && dash_data.member_dashboard) {
+            this.TeamDashboardDataEmitter.emit(dash_data.member_dashboard);
+        }
+    }
+
 
     public getPrayerRequestDashboardData() {
         return this.httpService.sendGetRequest('prayer_request_dashboard?token=' + this.authService.getUserToken())

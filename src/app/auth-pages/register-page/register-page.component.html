@@ -6,20 +6,20 @@
   <form class="form-signin card card-profile" (submit)="registerUser()">
     <div class="card-avatar">
       <a>
-        <img class="img" src="./assets/logo/mkc.png" />
+        <img class="img" src="./assets/logo/mkc.jpg" />
       </a>
     </div>
     <div class="text-center mb-4">
-      <h1 class="h3 mb-3 font-weight-normal">Create My Church Account</h1>
+      <h1 class="h3 mb-3 font-weight-normal">አዲስ አካውንት ይፍጠሩ</h1>
     </div>
     <div class="form-label-group">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Full Name" [(ngModel)]="new_register_user.full_name" name="full_name">
+        <input matInput placeholder="ሙሉ ስም" [(ngModel)]="new_register_user.full_name" name="full_name">
       </mat-form-field>
     </div>
     <div class="form-label-group">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Email" #em = "ngModel" [(ngModel)]="new_register_user.email" name="user_email" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+        <input matInput placeholder="የኢሜይል አካውንት" #em = "ngModel" [(ngModel)]="new_register_user.email" name="user_email" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
       </mat-form-field>
 
 
@@ -27,12 +27,12 @@
     </div>
     <div class="form-label-group">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Password" type="password" [(ngModel)]="new_register_user.password" name="user_password">
+        <input matInput placeholder="የይለፍ ቃል" type="password" [(ngModel)]="new_register_user.password" name="user_password">
       </mat-form-field>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-    <a [routerLink]="['/auth/login']">Login Now</a>
-    <p class="mt-5 mb-3 text-muted text-center">©2019</p>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">ይመዝገቡ</button>
+    <a [routerLink]="['/auth/login']">አሁን ይግቡ</a>
+    <p class="mt-5 mb-3 text-muted text-center">በግሬት ኮሚሽን ሚኒስተሪ ኢትዮጵያ የዲጂታል ስትራቴጂ አገልግሎት የተሰራ ©2019</p>
   </form>
 </div>
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '5px' }"></ngx-loading>

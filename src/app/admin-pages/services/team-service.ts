@@ -14,6 +14,7 @@ export class TeamService {
   public PaginatedTeamLeadersData = new EventEmitter<PaginatedTeamMembers>();
 
   public TeamCategories = new EventEmitter<TeamCategory[]>();
+    public teamLeadersEvent = new EventEmitter<Boolean>();
 
   constructor(private httpService: HttpRequestService, private authService: AuthService) { }
 
@@ -124,7 +125,7 @@ export class TeamService {
      * Team Leaders
      */
 
-    public updateTeamLeader(data: TeamMember) {
+    public updateTeamLeaders(data: TeamMember) {
         const headers = new Headers();
         return this.httpService.sendPostRequest('team_member/update?token=' + this.authService.getUserToken(), data, headers);
     }
@@ -141,6 +142,14 @@ export class TeamService {
         data.is_main_leader = false;
         const headers = new Headers();
         return this.httpService.sendPostRequest('team_member/update?token=' + this.authService.getUserToken(), data, headers);
+    }
+
+    public updateTeamLeader(data: TeamMember) {
+        const headers = new Headers();
+        this.httpService.sendPostRequest('team_member/update?token=' + this.authService.getUserToken(), data, headers)
+            .subscribe(
+                data => {this.teamLeadersEvent.emit(true);}
+            );
     }
 
     public addMainLeader(data: TeamMember) {

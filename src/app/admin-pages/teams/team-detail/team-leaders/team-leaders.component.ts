@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import swal from 'sweetalert2';
 import {PaginatedTeamMembers, Team, TeamMember} from "../../team.objects";
 import {HttpRequestService} from "../../../../services/http-request.service";
@@ -86,27 +86,45 @@ export class TeamLeadersComponent implements OnInit {
         member.status = true;
         member.is_leader = false;
         member.is_main_leader = false;
-        this.teamService.updateTeamMember(member).subscribe(
+
+        this.teamService.updateTeamLeader(member);
+        this.teamService.teamLeadersEvent.subscribe(
+            data =>{
+                this.updateTeamLeadersComponent()
+        });
+
+     /*   this.teamService.updateTeamMember(member).subscribe(
             data => {this.updateTeamLeadersComponent();  }
-        );
+        );*/
     }
 
     public makeNotMainLeader(member: TeamMember) {
         member.status = true;
         member.is_leader = true;
         member.is_main_leader = false;
+        this.teamService.teamLeadersEvent.subscribe(
+            data =>{
+                this.updateTeamLeadersComponent()
+            });
+        /*
         this.teamService.updateTeamMember(member).subscribe(
             data => {this.updateTeamLeadersComponent();  }
-        );
+        );*/
     }
 
     public makeMainLeader(member: TeamMember) {
         member.status = true;
         member.is_leader = true;
         member.is_main_leader = true;
-        this.teamService.updateTeamMember(member).subscribe(
+        this.teamService.updateTeamLeader(member);
+        this.teamService.teamLeadersEvent.subscribe(
+            data =>{
+                this.updateTeamLeadersComponent()
+            });
+
+     /*   this.teamService.updateTeamMember(member).subscribe(
             data => {this.updateTeamLeadersComponent();  }
-        );
+        );*/
     }
 
     public addNewMemberDialog(): void {

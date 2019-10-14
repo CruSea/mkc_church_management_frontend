@@ -8,6 +8,9 @@ import {EditTeamMemberComponent} from "./edit-team-member/edit-team-member.compo
 import {NewTeamMembersComponent} from "./new-team-members/new-team-members.component";
 import {NewTeamLeadersComponent} from "./new-team-leaders/new-team-leaders.component";
 import {Member} from "../../members/members.objects";
+import {DashboardService} from "../../services/dashboard.service";
+import { TeamDashboard} from "../../dashboard/dashboard.objects";
+import {TeamLeadersComponent} from "./team-leaders/team-leaders.component";
 declare var $: any;
 
 @Component({
@@ -23,8 +26,10 @@ export class TeamDetailComponent implements OnInit {
     public loading = false;
     public file_upload_event: any;
     public selected_member = new TeamMember();
+    public dashboard_data = new TeamDashboard();
 
-    constructor(private  httpService: HttpRequestService, private dialog: MatDialog, public teamService: TeamService)
+    constructor(private httpService: HttpRequestService, private dialog: MatDialog, public teamService: TeamService,
+                public dashboardService: DashboardService)
     {
     }
 
@@ -43,14 +48,26 @@ export class TeamDetailComponent implements OnInit {
         this.teamService.PaginatedTeamLeadersData.subscribe(
             data => {this.all_team_leaders = data; this.loading = false;  }
         );
+        this.dashboardService.TeamDashboardDataEmitter.subscribe(
+            data => {this.dashboard_data = data;  }
+        );
+
+        this.teamService.teamLeadersEvent.subscribe(
+            data => {if(data){
+                this.updateTeamMembersComponent();
+            }  }
+        );
+
     }
 
     public updateTeamMembersComponent() {
         this.teamService.getPaginatedTeamMembersData();
+        this.dashboardService.getTeamDashboardData();
     }
 
     public updateTeamLeadersComponent() {
         this.teamService.getPaginatedTeamLeadersData();
+        this.dashboardService.getTeamDashboardData();
     }
 
     public updateTeamMemberDataList(event: any) {

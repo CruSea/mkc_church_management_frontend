@@ -30,7 +30,7 @@
                                         <video #video id="video" width="180" height="180" autoplay></video>
                                     </div>
                                     <div>
-                                        <button id="snap" mat-raised-button (click)="capture()">Snap</button>
+                                        <button id="snap" mat-raised-button (click)="capture()">ፎቶ አንሳ</button>
                                         <button id="cancel" mat-raised-button (click)="photo_taken=!photo_taken">ይቅር </button>
                                     </div>
                                     <div class="form-label-group">
@@ -286,8 +286,8 @@
                         </div>
                         <div class="col-sm-3">
                             <mat-form-field>
-                                <input matInput [readonly]="!editable" [matDatepicker]="picker5" placeholder="የጥምቀት ቀን"
-                                       name="spouse_salvation_date" [(ngModel)]="new_member.salvation_date">
+                                <input matInput [readonly]="!editable" [matDatepicker]="picker5" placeholder="የድነት ቀን"
+                                       name="spouse_salvation_date" [(ngModel)]="new_member_spouse_info.salvation_date">
                                 <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
                                 <mat-datepicker #picker5></mat-datepicker>
                             </mat-form-field>
