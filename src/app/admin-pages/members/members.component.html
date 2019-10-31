@@ -142,6 +142,7 @@
                     <table class="table table-hover table-striped table-condensed">
                       <thead class=" text-primary">
                       <th> ቁጥር </th>
+                      <th> መለያ ቁጥር</th>
                       <th> ሙሉ ስም</th>
                       <th> ኢሜይል </th>
                       <th> ፆታ </th>
@@ -154,6 +155,7 @@
                       <tbody>
                       <tr *ngFor="let members of paginated_member_data.data; let i = index"   style="cursor: pointer;">
                         <td> {{paginated_member_data.from + i}} </td>
+                        <td> {{members.member_id}} </td>
                         <td class="zoom" (click)="viewMemberInfo(members)"> <strong >{{members.full_name}}</strong> </td>
                         <td class="zoom" (click)="viewMemberInfo(members)"> {{members.email}} </td>
                         <td class="zoom" (click)="viewMemberInfo(members)"> {{members.gender}} </td>

@@ -48,7 +48,7 @@
                                        [(ngModel)]="new_member.full_name" required>
                             </mat-form-field>
                             <mat-form-field>
-                                <input matInput [readonly]="!editable" [matDatepicker]="picker2" placeholder="የልደት ቀን" name="birth_day"
+                                <input matInput [readonly]="!editable" [matDatepicker]="picker2" placeholder="የየትውልድ ዘመን" name="birth_day"
                                        [(ngModel)]="new_member.birth_day" >
                                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                                 <mat-datepicker #picker2></mat-datepicker>
@@ -115,16 +115,6 @@
                         </div>
                         <div class="col-sm-3">
                             <mat-form-field>
-                                <mat-select placeholder="የቤተክርስቲያን ሴል ቡድን"  name="church_cell" [(ngModel)]="new_member.church_group_place">
-                                    <mat-option value="wereda_1"> ወረዳ 1 እና 9</mat-option>
-                                    <mat-option value="wereda_10"> ወረዳ 10</mat-option>
-                                    <mat-option value="wereda_11"> ወረዳ11</mat-option>
-                                    <mat-option value="special_wereda"> ልዩ ዞን</mat-option>
-                                </mat-select>
-
-                            </mat-form-field>
-
-                            <mat-form-field>
                                 <input matInput placeholder="አድራሻ" name="address" [(ngModel)]="new_member.address">
                             </mat-form-field>
                             <mat-form-field>
@@ -146,6 +136,54 @@
 
                         <div class="col-sm-3">
                             <mat-form-field>
+                                <input matInput [readonly]="!editable"  [matDatepicker]="picker4" placeholder="የመዳን ቀን"
+                                       name="salvation_date" [(ngModel)]="new_member.salvation_date">
+                                <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                                <mat-datepicker #picker4></mat-datepicker>
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <input matInput placeholder="የዳኑበት ቦታ" name="salvation_date"
+                                       [(ngModel)]="new_member.salvation_church">
+                            </mat-form-field>
+
+                            <mat-radio-group name="spouse_is_baptized" [(ngModel)]="new_member.is_baptized">
+                                <p class="d-inline"><small>በውሃ ጥምቀት ተጠምቀዋል?</small></p>&nbsp;
+                                <mat-radio-button value="አዎ">አዎ</mat-radio-button>&nbsp;
+                                <mat-radio-button value="አይ">አይ</mat-radio-button>
+                            </mat-radio-group>
+
+                            <mat-form-field *ngIf="new_member.is_baptized == 'አዎ'">
+                                <input matInput [readonly]="!editable"  [matDatepicker]="picker6" placeholder="የጥምቀት ቀን"
+                                       name="baptized_date" [(ngModel)]="new_member.baptized_date">
+                                <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+                                <mat-datepicker #picker6></mat-datepicker>
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <input matInput placeholder="የተጠመቁበት ቤተክርስቲያን" name="baptized_church" [(ngModel)]="new_member.baptized_church">
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <mat-select placeholder="የቤተክርስቲያን ሴል ቡድን"  name="church_cell" [(ngModel)]="new_member.church_group_place">
+                                    <mat-option value="wereda_1"> ወረዳ 1 እና 9</mat-option>
+                                    <mat-option value="wereda_10"> ወረዳ 10</mat-option>
+                                    <mat-option value="wereda_11"> ወረዳ11</mat-option>
+                                    <mat-option value="special_wereda"> ልዩ ዞን</mat-option>
+                                </mat-select>
+
+                            </mat-form-field>
+
+                            <mat-radio-group name="spouse_have_family_fellowship" [(ngModel)]="new_member.have_family_fellowship">
+                                <p class="d-inline"><small>በቤተሰብ ህብረት ተይዘዋል?</small></p>&nbsp;
+                                <mat-radio-button value="1">አዎ</mat-radio-button>&nbsp;
+                                <mat-radio-button value="0">አይ</mat-radio-button>
+                            </mat-radio-group>
+
+                        </div>
+
+                        <div class="col-sm-3">
+                            <mat-form-field>
                                 <input matInput placeholder="የአደጋ ጊዜ ተጠሪ ስም" name="address" [(ngModel)]="new_member.emergency_contact_name">
                             </mat-form-field>
                             <mat-form-field>
@@ -163,32 +201,6 @@
                             </mat-form-field>
                         </div>
 
-                        <div class="col-sm-3">
-                            <mat-form-field>
-                                <input matInput [readonly]="!editable"  [matDatepicker]="picker4" placeholder="የመዳን ቀን"
-                                       name="salvation_date" [(ngModel)]="new_member.salvation_date">
-                                <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-                                <mat-datepicker #picker4></mat-datepicker>
-                            </mat-form-field>
-
-                            <mat-radio-group name="spouse_is_baptized" [(ngModel)]="new_member.is_baptized">
-                                <p class="d-inline"><small>በውሃ ጥምቀት ተጠምቀዋል?</small></p>&nbsp;
-                                <mat-radio-button value="አዎ">አዎ</mat-radio-button>&nbsp;
-                                <mat-radio-button value="አይ">አይ</mat-radio-button>
-                            </mat-radio-group>
-
-                            <mat-form-field>
-                                <input matInput [readonly]="!editable"  [matDatepicker]="picker6" placeholder="የጥምቀት ቀን"
-                                       name="baptized_date" [(ngModel)]="new_member.baptized_date">
-                                <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
-                                <mat-datepicker #picker6></mat-datepicker>
-                            </mat-form-field>
-
-                            <mat-form-field>
-                                <input matInput placeholder="የተጠመቁበት ቤተክርስቲያን" name="baptized_church" [(ngModel)]="new_member.baptized_church">
-                            </mat-form-field>
-
-                        </div>
                     </div>
 
                     <div class="form-label-group">
@@ -229,7 +241,7 @@
                                        [(ngModel)]="new_member_spouse_info.full_name" required>
                             </mat-form-field>
                             <mat-form-field>
-                                <input matInput [readonly]="!editable" [matDatepicker]="picker" placeholder="የልደት ቀን" name="birth_day"
+                                <input matInput [readonly]="!editable" [matDatepicker]="picker" placeholder="የትውልድ ዘመን" name="birth_day"
                                        [(ngModel)]="new_member_spouse_info.birth_day">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
@@ -347,7 +359,7 @@
                                                [(ngModel)]="new_member_child_info.full_name" required>
                                     </mat-form-field>
                                     <mat-form-field>
-                                        <input matInput [readonly]="!editable" [matDatepicker]="pickerchild1" placeholder="የልደት ቀን"
+                                        <input matInput [readonly]="!editable" [matDatepicker]="pickerchild1" placeholder="የትውልድ ዘመን"
                                                name="birthday" [(ngModel)]="new_member_child_info.birthday">
                                         <mat-datepicker-toggle matSuffix [for]="pickerchild1"></mat-datepicker-toggle>
                                         <mat-datepicker #pickerchild1></mat-datepicker>
@@ -366,7 +378,7 @@
                                                [(ngModel)]="new_member_child_info.full_name" required>
                                     </mat-form-field>
                                     <mat-form-field>
-                                        <input matInput [matDatepicker]="pickerchild2" placeholder="የልደት ቀን"
+                                        <input matInput [matDatepicker]="pickerchild2" placeholder="የትውልድ ዘመን"
                                                name="birthday" [(ngModel)]="new_member_child_info.birthday">
                                         <mat-datepicker-toggle matSuffix [for]="pickerchild2"></mat-datepicker-toggle>
                                         <mat-datepicker #pickerchild2></mat-datepicker>

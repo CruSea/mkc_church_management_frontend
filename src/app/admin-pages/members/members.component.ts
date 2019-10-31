@@ -50,6 +50,7 @@ export class MembersComponent implements OnInit {
       //     data => {this.dashboard_member_data = data; }
       // );
   }
+
   public updateMembersComponent() {
       this.dashboardService.getMemberDashboardData();
       if (this.filter_activate) {
@@ -113,7 +114,7 @@ export class MembersComponent implements OnInit {
                 customClass: 'animated tada'
             });
         }
-);
+    );
     }
     public makePartner(member: Member) {
         member.status = false;

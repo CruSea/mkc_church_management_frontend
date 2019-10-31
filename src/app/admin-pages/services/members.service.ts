@@ -103,6 +103,8 @@ export class MembersService {
       formData.append('wereda', member_data.wereda);
       formData.append('house_number', member_data.house_number);
       formData.append('baptized_church', member_data.baptized_church);
+      formData.append('baptized_date', member_data.baptized_date);
+      formData.append('is_baptized', member_data.is_baptized);
       formData.append('church_group_place', member_data.church_group_place);
       formData.append('birth_place', member_data.birth_place);
       formData.append('emergency_contact_name', member_data.emergency_contact_name);
@@ -121,6 +123,16 @@ export class MembersService {
       formData.append('nationality', member_data.nationality);
       formData.append('marital_status', member_data.marital_status);
       formData.append('address', member_data.address);
+      formData.append('salvation_date', member_data.salvation_date);
+      formData.append('salvation_church', member_data.salvation_church);
+
+      if(member_data.have_family_fellowship){
+          formData.append('have_family_fellowship', '1');
+      }
+      else{
+          formData.append('have_family_fellowship', '0');
+      }
+
     return this.httpService.sendPostRequest('new_member?token=' + this.authService.getUserToken(), formData, new_header);
   }
   public addNewMember2(member_data: Member) {

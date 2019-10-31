@@ -41,6 +41,7 @@ export class EditMemberDialogComponent implements OnInit, AfterViewInit {
     public photo_taken = false;
     public show_pic = true;
     public loading = false;
+
   constructor(private membersService: MembersService,
               private _formBuilder: FormBuilder,
               private usersService: UsersService,
@@ -48,12 +49,13 @@ export class EditMemberDialogComponent implements OnInit, AfterViewInit {
               @Inject(MAT_DIALOG_DATA) member_data: Member) {
     this.selected_member = member_data;
 
-      if(this.selected_member.spouse != null ) {
+      if (this.selected_member.spouse != null ) {
           this.is_spouse = true;
               this.new_member_spouse_info = this.selected_member.spouse;
       } else{
           this.is_spouse = false;
       }
+
       if(this.selected_member.children != null && this.selected_member.children.length > 0 ) {
           this.is_children = true;
           this.selected_member_children_info = this.selected_member.children;

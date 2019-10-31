@@ -5,6 +5,7 @@ export class Member {
 
     public id: number;
     public full_name: string;
+    public member_id: string;
     public photo_url: string;
     public image_file: any;
     public image_file_name: string;
@@ -25,6 +26,7 @@ export class Member {
     public employment_position: string;
     public gender: string;
     public salvation_date: string;
+    public salvation_church: string;
     public is_baptized: string;
     public baptized_date: string;
     public nationality: string;
@@ -33,6 +35,7 @@ export class Member {
     public emergency_contact_phone: string;
     public emergency_contact_subcity: string;
     public emergency_contact_house_no: string;
+    public have_family_fellowship: boolean;
     public status: boolean;
     public address: string;
     public spouse: Spouse;
@@ -43,6 +46,7 @@ export class Member {
 
     constructor() {
         this.id = null;
+        this.member_id = '';
         this.full_name = '';
         this.photo_url = '';
         this.image_file = null;
@@ -62,6 +66,7 @@ export class Member {
         this.employment_position = '';
         this.gender = '';
         this.salvation_date = '';
+        this.salvation_church = '';
         this.is_baptized = '';
         this.baptized_date = '';
         this.baptized_church = '';
@@ -71,6 +76,7 @@ export class Member {
         this.emergency_contact_house_no = '';
         this.emergency_contact_phone = '';
         this.emergency_contact_subcity = '';
+        this.have_family_fellowship = false;
         this.status = true;
         this.address = '';
         this.spouse = new Spouse();
