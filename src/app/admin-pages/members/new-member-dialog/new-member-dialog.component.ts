@@ -163,6 +163,7 @@ export class NewMemberDialogComponent implements OnInit, AfterViewInit {
       }
 
   }
+
     public setMemberData(response: any) {
       if ( response.result && response.result.id) {
           localStorage.setItem('pjh_Member_id', JSON.stringify(response.result.id));

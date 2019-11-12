@@ -232,18 +232,18 @@
             </div>
             <div class="col-sm-3">
               <mat-form-field>
-                <input matInput placeholder="ሙሉ ስም" name="full_name"
+                <input matInput placeholder="ሙሉ ስም" name="spouse_full_name"
                        [(ngModel)]="new_member_spouse_info.full_name" required>
               </mat-form-field>
               <mat-form-field>
-                <input matInput [readonly]="!editable" [matDatepicker]="picker" placeholder="የትውልድ ዘመን" name="birth_day"
+                <input matInput [readonly]="!editable" [matDatepicker]="picker" placeholder="የትውልድ ዘመን" name="spouse_birth_day"
                        [(ngModel)]="new_member_spouse_info.birth_day">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
 
               <mat-form-field>
-                <mat-select placeholder="ፆታ"  name="gender" [(ngModel)]="new_member_spouse_info.gender">
+                <mat-select placeholder="ፆታ"  name="spouse_gender" [(ngModel)]="new_member_spouse_info.gender">
                   <mat-option value="ወንድ">ወንድ</mat-option>
                   <mat-option value="ሴት">ሴት</mat-option>
                 </mat-select>
@@ -251,41 +251,41 @@
             </div>
             <div class="col-sm-3">
               <mat-form-field>
-                <input matInput placeholder="ኢሜይል" name="email"
+                <input matInput placeholder="ኢሜይል" name="spouse_email"
                        [(ngModel)]="new_member_spouse_info.email" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"/>
               </mat-form-field>
 
               <mat-form-field>
-                <input matInput placeholder="ስልክ ቁጥር" name="phone_cell"
+                <input matInput placeholder="ስልክ ቁጥር" name="spouse_phone_cell"
                        [(ngModel)]="new_member_spouse_info.phone_cell" pattern='^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$'/>
               </mat-form-field>
             </div>
             <div class="col-sm-3">
               <mat-form-field>
-                <mat-select placeholder="ዜግነት" name="nationality" [(ngModel)]="new_member_spouse_info.nationality" >
+                <mat-select placeholder="ዜግነት" name="spouse_nationality" [(ngModel)]="new_member_spouse_info.nationality" >
                   <mat-option *ngFor="let list of countries.list" value="{{list.nationality}}">{{list.nationality}}</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field>
-                <input matInput placeholder="ከተማ" name="city"
+                <input matInput placeholder="ከተማ" name="spouse_city"
                        [(ngModel)]="new_member_spouse_info.city">
               </mat-form-field>
               <mat-form-field>
-                <input matInput placeholder="አድራሻ" name="address"
+                <input matInput placeholder="አድራሻ" name="spouse_address"
                        [(ngModel)]="new_member_spouse_info.address" required>
               </mat-form-field>
             </div>
             <div class="col-sm-3">
               <mat-form-field>
-                <input matInput placeholder="ስራ መስክ" name="occupation"
+                <input matInput placeholder="ስራ መስክ" name="spouse_occupation"
                        [(ngModel)]="new_member_spouse_info.occupation">
               </mat-form-field>
               <mat-form-field>
-                <input matInput placeholder="የስራ ሃላፊነት" name="employment_position"
+                <input matInput placeholder="የስራ ሃላፊነት" name="spouse_employment_position"
                        [(ngModel)]="new_member_spouse_info.employment_position">
               </mat-form-field>
               <mat-form-field>
-                <input matInput placeholder="የስራ ቦታ" name="employment_place"
+                <input matInput placeholder="የስራ ቦታ" name="spouse_employment_place"
                        [(ngModel)]="new_member_spouse_info.employment_place">
               </mat-form-field>
             </div>
@@ -308,7 +308,7 @@
             </div>
             <div class="col-sm-3">
               <mat-form-field>
-                <input matInput [readonly]="!editable" [matDatepicker]="pickerSpBapDa" placeholder="የጥምቀት ቀን" name="baptized_date"
+                <input matInput [readonly]="!editable" [matDatepicker]="pickerSpBapDa" placeholder="የጥምቀት ቀን" name="spouse_baptized_date"
                        [(ngModel)]="new_member_spouse_info.baptized_date">
                 <mat-datepicker-toggle matSuffix [for]="pickerSpBapDa"></mat-datepicker-toggle>
                 <mat-datepicker #pickerSpBapDa></mat-datepicker>
@@ -408,27 +408,41 @@
                 <small>የቀድሞ የቤተ ክርስቲያን መረጃ ዝርዝር</small>
               </p>
             </div>
-            <div class="col-sm-12">
-              <mat-form-field>
-                <input matInput placeholder="የቤተ ክርስቲያን ስም" name="church_name"
-                       [(ngModel)]="new_member_previous_church_info.church_name" required>
-              </mat-form-field>
-              <mat-form-field>
-                <input matInput placeholder="የለቀቁበት ምክንያት" name="leaving_reason"
-                       [(ngModel)]="new_member_previous_church_info.leaving_reason" required>
-              </mat-form-field>
-              <mat-radio-group name="was_member" [(ngModel)]="new_member_previous_church_info.was_member">
-                <p>አባል ነበሩ?</p>
-                <mat-radio-button value="አዎ">አዎ</mat-radio-button>&nbsp;
-                <mat-radio-button value="አይ">አይ</mat-radio-button>
-              </mat-radio-group>
-              <mat-form-field>
-                <input matInput placeholder="ቆይታ" name="duration"
-                       [(ngModel)]="new_member_previous_church_info.duration" required>
-              </mat-form-field>
-              <div class="form-label-group">
-                <label>የመሸኛ ደብዳቤ ምስል አያይዝ</label>
-                <input class="form-control" placeholder="የመሸኛ ደብዳቤ ምስል" type="file" name="selected_file" id="selected_file_id" (change)="fileUploadEvent($event)">
+            <div class="row">
+
+              <div class="col-sm-2">
+                <mat-card >
+                  <!--<mat-card-title>-->
+                  <img  mat-card-image  class="img-article" height="250" width="250" [src] ="new_member_previous_church_info.image_url" alt="Image_previous church">
+                  <!--</mat-card-title>-->
+                </mat-card>
+                <br>
+              </div>
+
+              <div class="col-sm-8">
+
+                <mat-form-field>
+                  <input matInput placeholder="የቤተ ክርስቲያን ስም" name="church_name"
+                         [(ngModel)]="new_member_previous_church_info.church_name" required>
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput placeholder="የለቀቁበት ምክንያት" name="leaving_reason"
+                         [(ngModel)]="new_member_previous_church_info.leaving_reason" required>
+                </mat-form-field>
+                <mat-radio-group name="was_member" [(ngModel)]="new_member_previous_church_info.was_member">
+                  <p>አባል ነበሩ?</p>
+                  <mat-radio-button value="አዎ">አዎ</mat-radio-button>&nbsp;
+                  <mat-radio-button value="አይ">አይ</mat-radio-button>
+                </mat-radio-group>
+                <mat-form-field>
+                  <input matInput placeholder="ቆይታ" name="duration"
+                         [(ngModel)]="new_member_previous_church_info.duration" required>
+                </mat-form-field>
+                <div class="form-label-group">
+                  <label>የመሸኛ ደብዳቤ ምስል አያይዝ</label>
+                  <input class="form-control" placeholder="የመሸኛ ደብዳቤ ምስል" type="file" name="selected_file" id="selected_file_id" (change)="fileUploadEvent($event)">
+                </div>
+
               </div>
 
             </div>

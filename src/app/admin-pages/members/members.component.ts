@@ -21,6 +21,8 @@ declare var $: any;
 export class MembersComponent implements OnInit {
   public paginated_public_users = new PaginatedMembers();
   public searchText: string;
+  public searchTextType: string;
+  public searchType: string;
   public loading = false;
   public file_upload_event: any;
   public selected_member = new Member();
@@ -70,6 +72,10 @@ export class MembersComponent implements OnInit {
     }
     public searchMember(searchText: string){
           this.memberService.getPaginatedSearchMembers(searchText);
+    }
+
+    public searchMemberDetail(searchText: string, searchType: string){
+        this.memberService.getPaginatedSearchMembersDetail(searchText, searchType);
     }
     public getMembers() {
         this.loading = true;

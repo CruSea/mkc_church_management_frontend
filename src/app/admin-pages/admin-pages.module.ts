@@ -47,6 +47,8 @@ import { AvatarModule } from 'ngx-avatar';
 import {MatTableModule} from '@angular/material/table';
 import { EditTeamMemberComponent } from './teams/team-detail/edit-team-member/edit-team-member.component';
 import { NewTeamMembersComponent } from './teams/team-detail/new-team-members/new-team-members.component';
+import { TeamCategoriesComponent } from './teams/team-categories/team-categories.component';
+import { NewTeamCategoryComponent } from './teams/team-categories/new-team-category/new-team-category.component';
 
 @NgModule({
   imports: [
@@ -107,6 +109,8 @@ import { NewTeamMembersComponent } from './teams/team-detail/new-team-members/ne
     NewTeamLeadersComponent,
     EditTeamMemberComponent,
     NewTeamMembersComponent,
+    TeamCategoriesComponent,
+    NewTeamCategoryComponent,
     ],
   providers: [UsersService, DashboardService, TeamService],
   entryComponents: [NewUserDialogComponent,
@@ -124,6 +128,8 @@ import { NewTeamMembersComponent } from './teams/team-detail/new-team-members/ne
       NewTeamLeadersComponent,
       EditTeamMemberComponent,
       NewTeamMembersComponent,
+      TeamCategoriesComponent,
+      NewTeamCategoryComponent,
   ]
 
 })

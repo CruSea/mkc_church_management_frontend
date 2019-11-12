@@ -76,6 +76,7 @@
                       <div class="ripple-container"></div>
                     </a>
                   </li>
+
                   <li class="nav-item pull-right">
                     <div class="input-group col-sm-12 pull-right">
                       <input type="text" name="searchTxt" id="searchTxt" [(ngModel)]= "searchText"  class="form-control">
@@ -84,13 +85,41 @@
                    </span>
                     </div><!-- /input-group -->
                   </li>
+
+
+                  <li class="nav-item pull-right">
+                    <span class="col-lg-3 col-md-3 col-sm-12 nav-tabs-title">ተጨማሪ መፈለጊያ:</span>
+                    <div class="input-group col-lg-9 col-md-9 col-sm-12 pull-right">
+                      <input type="text" name="searchTxt" id="searchTxt" [(ngModel)]= "searchTextType"  class="form-control">
+
+                      <mat-form-field>
+                        <mat-select placeholder="የጋብቻ ሁኔታ"  name="marital_status" [(ngModel)]="searchType">
+                          <mat-option value="name">ስም</mat-option>
+                          <mat-option value="phone">ስልክ</mat-option>
+                          <mat-option value="email">ኢሜይል</mat-option>
+                          <mat-option value="gender">ፆታ</mat-option>
+                          <mat-option value="city">ከተማ</mat-option>
+                          <mat-option value="subcity">ክፍለ-ከተማ</mat-option>
+                          <mat-option value="educational_status">የትምህርት ደረጃ</mat-option>
+                          <mat-option value="marital_status">የጋብቻ ሁኔታ</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" (click)="searchMemberDetail(searchTextType, searchType);" type="button">ፈልግ!</button>
+                      </span>
+                    </div><!-- /input-group -->
+                  </li>
+
                 </ul>
-                <!--<form class="example-form" class="col-sm-6">-->
-                  <!--<mat-form-field>-->
-                    <!--<input matInput placeholder="Search"  value="Search">-->
-                  <!--</mat-form-field>-->
-                  <!--<button mat-raised-button type="button" (click)="searchMember();" class="btn btn-default">Search</button>-->
-                <!--</form>-->
+
+
+               <!-- <form class="example-form" class="col-sm-6">
+                  <mat-form-field>
+                    <input matInput placeholder="Search"  value="Search">
+                  </mat-form-field>
+                  <button mat-raised-button type="button" (click)="searchMember();" class="btn btn-default">Search</button>
+                </form>-->
 
               </div>
             </div>

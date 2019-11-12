@@ -8,6 +8,7 @@ import {PublicUsersComponent} from "./public-users/public-users.component";
 import {AuthGuard} from "../services/auth.guard";
 import {TeamsComponent} from "./teams/teams.component";
 import {TeamDetailComponent} from "./teams/team-detail/team-detail.component";
+import {TeamCategoriesComponent} from "./teams/team-categories/team-categories.component";
 
 export const AdminPagesRouting: Routes = [
   { path: 'dashboard',      component: DashboardComponent, canActivate: [AuthGuard] },
@@ -15,6 +16,7 @@ export const AdminPagesRouting: Routes = [
   { path: 'members',      component: MembersComponent,   canActivate: [AuthGuard]},
   { path: 'teams',      component: TeamsComponent,   canActivate: [AuthGuard]},
   { path: 'team/members',      component: TeamDetailComponent,   canActivate: [AuthGuard]},
+  { path: 'team/categories',      component: TeamCategoriesComponent,   canActivate: [AuthGuard]},
   { path: 'partnership',      component: PartnershipComponent, canActivate: [AuthGuard]},
   { path: 'settings',      component: SettingsComponent, canActivate: [AuthGuard]},
   { path: 'users',      component: UsersComponent, canActivate: [AuthGuard]},

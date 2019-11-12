@@ -28,6 +28,14 @@ export class MembersService {
             );
     }
 
+    public getPaginatedSearchMembersDetail(searchText: string, searchType: string ) {
+        return this.httpService.sendGetRequest('search_members_detail?search=' +  searchText + '&search_type=' + searchType + '&token=' + this.authService.getUserToken())
+            .subscribe(
+                data => { this.processGetPaginatedMembers(data); console.log('members: ', data)},
+                error => { console.log(error); },
+            );
+    }
+
   public getPaginatedMemberAll(path: any ) {
     return this.httpService.sendCustomGetRequest(path + '&token=' + this.authService.getUserToken())
         .subscribe(

@@ -2,7 +2,10 @@ import {EventEmitter, Injectable} from '@angular/core';
 import {HttpRequestService} from '../../services/http-request.service';
 import {AuthService} from '../../services/auth.service';
 import {Headers} from "@angular/http";
-import {PaginatedTeamMembers, PaginatedTeams, Team, TeamCategory, TeamMember} from "../teams/team.objects";
+import {
+    PaginatedTeamCategories, PaginatedTeamMembers, PaginatedTeams, Team, TeamCategory,
+    TeamMember
+} from "../teams/team.objects";
 import {Member} from "../members/members.objects";
 
 @Injectable({
@@ -13,6 +16,7 @@ export class TeamService {
   public PaginatedTeamMembersData = new EventEmitter<PaginatedTeamMembers>();
   public PaginatedTeamLeadersData = new EventEmitter<PaginatedTeamMembers>();
 
+  public PaginatedTeamCategories = new EventEmitter<PaginatedTeamCategories>();
   public TeamCategories = new EventEmitter<TeamCategory[]>();
     public teamLeadersEvent = new EventEmitter<Boolean>();
 
@@ -184,6 +188,30 @@ export class TeamService {
     /**
      * Team Categories
      */
+
+
+    public getPaginatedTeamCategoriesAll(path: any ) {
+        return this.httpService.sendCustomGetRequest(path + '&token=' + this.authService.getUserToken())
+            .subscribe(
+                data => { this.processGetPaginatedTeamCategoriesData(data); console.log('members: ', data)},
+                error => { console.log(error); },
+            );
+    }
+
+    public getPaginatedTeamCategoriesData() {
+        this.httpService.sendGetRequest('team_categories/paginated?token=' + this.authService.getUserToken())
+            .subscribe(
+                data => { this.processGetPaginatedTeamCategoriesData(data); console.log('teams: ', data)},
+                error => { console.log(error); },
+            );
+    }
+
+    private processGetPaginatedTeamCategoriesData(data) {
+        if (data && data.status && data.result) {
+            this.PaginatedTeamCategories.emit(data.result);
+        }
+    }
+
     public getTeamCategories() {
         this.httpService.sendGetRequest('team_categories?token=' + this.authService.getUserToken())
             .subscribe(

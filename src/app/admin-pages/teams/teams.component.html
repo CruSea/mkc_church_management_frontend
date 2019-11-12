@@ -9,12 +9,19 @@
                 <span class="nav-tabs-title">Filters:</span>
               </div>
             </div>
+
             <div class="nav-tabs-navigation">
               <div class="nav-tabs-wrapper">
                 <ul class="nav nav-tabs pull-right" data-tabs="tabs">
                   <li class="nav-item pull-right">
+                    <a mat-button class="nav-link" (click)="showCategories()">
+                      <i class="material-icons">assignment</i>የቡድን እይነቶች
+                    </a>
+                  </li>
+
+                  <li class="nav-item pull-right">
                     <a mat-button class="nav-link active" (click)="addNewTeam()">
-                      <i class="material-icons">assignment</i>ቡድን ፍጠር
+                      <i class="material-icons">add</i>ቡድን ፍጠር
                       <div class="ripple-container"></div>
                     </a>
                   </li>
@@ -41,11 +48,15 @@
                     <mat-card-content>
                       <div class="col-10">
 
-                        <ngx-avatar name="{{team.name}}"></ngx-avatar>
+                        <div class="row">
 
-                        <a (click)="openTeamDetail(team);" [routerLink]="['/admin/team/members']">
-                          <h4 class="title">{{(team.name.length > 30)?(team.name | slice:0:20)+ '..':(team.name)}}</h4>
-                        </a>
+                          <a (click)="openTeamDetail(team);" [routerLink]="['/admin/team/members']" class="col-12">
+
+                            <ngx-avatar name="{{team.name}}"></ngx-avatar>
+                            <h4 class="title">{{(team.name.length > 30)?(team.name | slice:0:20)+ '..':(team.name)}}</h4>
+                          </a>
+                        </div>
+
 
                       </div>
                       <br>

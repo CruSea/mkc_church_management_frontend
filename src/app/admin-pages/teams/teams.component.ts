@@ -5,8 +5,9 @@ import {TeamService} from "../services/team-service";
 import {MatDialog, MatDialogConfig, MatTableDataSource} from "@angular/material";
 import {NewTeamComponent} from "./new-team/new-team.component";
 import {EditTeamComponent} from "./edit-team/edit-team.component";
-import swal from 'sweetalert2';
 import {Router} from "@angular/router";
+import {TeamCategoriesComponent} from "./team-categories/team-categories.component";
+import swal from 'sweetalert2';
 declare var $: any;
 
 
@@ -41,7 +42,12 @@ export class TeamsComponent implements OnInit {
     public updateTeamsComponent() {
         this.teamService.getPaginatedTeamsData();
     }
+
     public openModal(template: TemplateRef<any>) {
+        this.modalRef = this.modalService.show(template);
+    }
+
+    public openTeamCategories(template: TemplateRef<any>) {
         this.modalRef = this.modalService.show(template);
     }
 
@@ -49,6 +55,8 @@ export class TeamsComponent implements OnInit {
     // public getImageFullUrl(image_url: string) {
     //   return this.playlistService.getRootUrl() + image_url;
     // }
+
+
     public addNewTeam(): void {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = false;
@@ -82,6 +90,7 @@ export class TeamsComponent implements OnInit {
             }
         });
     }
+
     // public onEditPlaylist(playlist) {
     //   this.selected_playlist = playlist;
     // }
@@ -167,6 +176,7 @@ export class TeamsComponent implements OnInit {
             confirmButtonColor: '#DD6B55', confirmButtonText: 'Ok, I Got It',
         });
     }
+
     public showNotification(type_id, from, align, message_text) {
         const type = ['', 'info', 'success', 'warning', 'danger'];
         $.notify({
@@ -199,5 +209,18 @@ export class TeamsComponent implements OnInit {
         localStorage.setItem('selected_team_id',  '' + team.id);
 
         // this.router.navigate(['/admin/teams/member']);
+    }
+
+
+
+    public showCategories(): void {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = false;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = '1100px';
+        dialogConfig.data = new Team();
+        const dialogRef = this.dialog.open(TeamCategoriesComponent, dialogConfig);
+        dialogRef.afterClosed().subscribe(result => {
+        });
     }
 }

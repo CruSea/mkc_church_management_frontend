@@ -51,19 +51,13 @@
                         <mat-form-field>
                           <input matInput [readonly]="!editable" placeholder="ስራ" name="occupation" [(ngModel)]="selected_member_data.occupation" >
                         </mat-form-field>
-                        <mat-form-field>
-                          <input matInput  [readonly]="!editable" placeholder="የስራ ሃላፊነት"  name="employment_position" [(ngModel)]="selected_member_data.employment_position" >
-                        </mat-form-field>
-                        <mat-form-field>
-                          <input matInput  [readonly]="!editable" placeholder="የስራ ቦታ"  name="employment_place" [(ngModel)]="selected_member_data.employment_place">
-                        </mat-form-field>
               </div>
                 <div class="col-sm-3">
                     <mat-form-field>
                         <input matInput [readonly]="!editable" placeholder="አድራሻ" name="address" [(ngModel)]="selected_member_data.address">
                     </mat-form-field>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <mat-form-field>
                         <input matInput [readonly]="!editable"  placeholder="የመዳን ቀን"
                                name="salvation_date" [(ngModel)]="selected_member_data.salvation_date">
@@ -73,7 +67,7 @@
                 <div class="col-sm-3">
                     <mat-form-field>
                         <input matInput [readonly]="!editable"  placeholder="በውሃ ጥምቀት ተጠምቀዋል?"
-                               name="salvation_date" [(ngModel)]="selected_member_data.is_baptized">
+                               name="is_baptized" [(ngModel)]="selected_member_data.is_baptized">
                     </mat-form-field>
                 </div>
                 <div class="col-sm-3">
@@ -95,7 +89,7 @@
                      <input matInput [readonly]="!editable" placeholder="ሙሉ ስም" name="spouse_full_name"  [(ngModel)]="selected_member_data.spouse.full_name" >
                    </mat-form-field>
                    <mat-form-field>
-                     <input matInput  [readonly]="!editable" placeholder="የትዳር ጓደኛ የትውልድ ዘመን "  name="birth_day" [(ngModel)]="selected_member_data.spouse.birth_day">
+                     <input matInput  [readonly]="!editable" placeholder="የትዳር ጓደኛ የትውልድ ዘመን "  name="spouse_birth_day" [(ngModel)]="selected_member_data.spouse.birth_day">
                    </mat-form-field>
 
                    <mat-form-field>
@@ -145,7 +139,7 @@
            <div class="col-sm-6">
                <mat-form-field>
                    <input matInput [readonly]="!editable"  placeholder="በውሃ ጥምቀት ተጠምቀዋል?"
-                          name="salvation_date" [(ngModel)]="selected_member_data.spouse.is_baptized">
+                          name="spouse_is_baptized" [(ngModel)]="selected_member_data.spouse.is_baptized">
                </mat-form-field>
 
            </div>
@@ -218,7 +212,7 @@
                                <input matInput  [readonly]="!editable" placeholder="የለቀቁበት ምክንያት" name="leaving_reason"  [(ngModel)]="selected_member_data.member_previous_church.leaving_reason" >
                            </mat-form-field>
                            <mat-form-field>
-                               <input matInput  [readonly]="!editable" placeholder="አባል ነበሩ?" name="duration"  [(ngModel)]="selected_member_data.member_previous_church.was_member" >
+                               <input matInput  [readonly]="!editable" placeholder="አባል ነበሩ?" name="was_member"  [(ngModel)]="selected_member_data.member_previous_church.was_member" >
                            </mat-form-field>
 
                            <mat-form-field>

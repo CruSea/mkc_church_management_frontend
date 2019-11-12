@@ -25,6 +25,7 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.user_roles_list = [];
     this.updateUsersComponent();
+
     this.usersService.PaginatedUsersEmitter.subscribe(
         data => {this.paginated_users = data; this.loading = false; }
     );

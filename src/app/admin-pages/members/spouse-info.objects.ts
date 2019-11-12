@@ -11,6 +11,8 @@ export class Spouse {
     public occupation: string;
     public employment_place: string;
     public employment_position: string;
+    public is_baptized: string;
+    public baptized_date: string;
     public gender: string;
     public nationality: string;
     public address: string;
@@ -29,6 +31,8 @@ export class Spouse {
         this.occupation = '';
         this.employment_place = '';
         this.employment_position = '';
+        this.baptized_date = '';
+        this.is_baptized = '';
         this.gender = '';
         this.nationality = '';
         this.address = '';
