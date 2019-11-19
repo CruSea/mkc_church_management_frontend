@@ -275,6 +275,7 @@
                        [(ngModel)]="new_member_spouse_info.address" required>
               </mat-form-field>
             </div>
+
             <div class="col-sm-3">
               <mat-form-field>
                 <input matInput placeholder="ስራ መስክ" name="spouse_occupation"
@@ -289,6 +290,7 @@
                        [(ngModel)]="new_member_spouse_info.employment_place">
               </mat-form-field>
             </div>
+
             <div class="col-sm-3">
               <mat-form-field>
                 <input matInput [readonly]="!editable" [matDatepicker]="picker5" placeholder="የድነት ቀን"
@@ -355,6 +357,7 @@
                     <th> ሙሉ ስም </th>
                     <th> የትውልድ ዘመን </th>
                     <th> ፆታ </th>
+                    <th> ... </th>
                     <!--<th> Action </th>-->
                     </thead>
                     <tbody>
@@ -363,6 +366,18 @@
                       <td> <strong>{{childrens.full_name}}</strong></td>
                       <td> {{childrens.birthday}} </td>
                       <td> {{childrens.gender}} </td>
+                      <td class="td-actions">
+                        <div class="dropdown">
+                          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">edit</i>  ተጨማሪ
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" (click)="removeChild(childrens)">ያስወግዱ</a>
+                          </div>
+                        </div>
+
+                      </td>
+
                       <!--<td class="td-actions">-->
                       <!--<button mat-raised-button type="button" matTooltip="Remove Public User"-->
                       <!--[matTooltipPosition]="'above'" (click)="removeUser(user)"-->
@@ -374,6 +389,19 @@
                     </tbody>
                   </table>
                 </div>
+
+
+                <div class="col-12">
+
+                  <div class="form-label-group">
+                    <br>
+                    <button mat-raised-button type="button" (click)="addNewChild();"
+                            class="btn btn-info pull-left">አዲስ ልጅ ጨምር
+                    </button>
+                  </div>
+                </div>
+
+
               </div>
             </div>
 
@@ -387,6 +415,8 @@
         </mat-expansion-panel>
       </mat-accordion>
     </div>
+
+
     <div class="col-sm-12">
       <p>
         <small>የቀድሞ የቤተ ክርስቲያን መረጃ ዝርዝር</small>

@@ -49,6 +49,7 @@ import { EditTeamMemberComponent } from './teams/team-detail/edit-team-member/ed
 import { NewTeamMembersComponent } from './teams/team-detail/new-team-members/new-team-members.component';
 import { TeamCategoriesComponent } from './teams/team-categories/team-categories.component';
 import { NewTeamCategoryComponent } from './teams/team-categories/new-team-category/new-team-category.component';
+import { NewMemberChildComponent } from './members/edit-member/new-member-child/new-member-child.component';
 
 @NgModule({
   imports: [
@@ -111,6 +112,7 @@ import { NewTeamCategoryComponent } from './teams/team-categories/new-team-categ
     NewTeamMembersComponent,
     TeamCategoriesComponent,
     NewTeamCategoryComponent,
+    NewMemberChildComponent,
     ],
   providers: [UsersService, DashboardService, TeamService],
   entryComponents: [NewUserDialogComponent,
@@ -130,6 +132,7 @@ import { NewTeamCategoryComponent } from './teams/team-categories/new-team-categ
       NewTeamMembersComponent,
       TeamCategoriesComponent,
       NewTeamCategoryComponent,
+      NewMemberChildComponent,
   ]
 
 })

@@ -2,11 +2,12 @@ import {AfterViewInit, Component, OnInit, Inject, ElementRef, ViewChild} from '@
 import {MembersService} from '../../services/members.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UsersService} from '../../services/users.service';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig, MatDialog} from '@angular/material';
 import {Children, Member, MemberPreviousChurch, Spouse} from '../members.objects';
 import {User} from '../../users/users.objects';
 import swal from 'sweetalert2';
 import {Countries} from "../countries.objects";
+import {NewMemberChildComponent} from "./new-member-child/new-member-child.component";
 declare var $: any;
 @Component({
   selector: 'app-edit-member-dialog',
@@ -43,15 +44,20 @@ export class EditMemberDialogComponent implements OnInit, AfterViewInit {
     public loading = false;
 
   constructor(private membersService: MembersService,
+              private dialog: MatDialog,
               private _formBuilder: FormBuilder,
               private usersService: UsersService,
               public dialogRef: MatDialogRef<EditMemberDialogComponent>,
               @Inject(MAT_DIALOG_DATA) member_data: Member) {
     this.selected_member = member_data;
 
+      this.loadData();
+  }
+
+  public loadData(){
       if (this.selected_member.spouse != null ) {
           this.is_spouse = true;
-              this.new_member_spouse_info = this.selected_member.spouse;
+          this.new_member_spouse_info = this.selected_member.spouse;
       } else{
           this.is_spouse = false;
       }
@@ -69,7 +75,7 @@ export class EditMemberDialogComponent implements OnInit, AfterViewInit {
           this.is_church = false;
       }
 
-    this.captures = [];
+      this.captures = [];
       if (this.selected_member.spouse == null) {
           this.selected_member.spouse = new Spouse();
       }
@@ -86,10 +92,26 @@ export class EditMemberDialogComponent implements OnInit, AfterViewInit {
     this.usersService.UserRoleListEmitter.subscribe(
         data => {this.user_roles_list = data; }
     );
+
+    this.membersService.selected_member_emitter.subscribe(
+        data => {
+            console.log("New member data " + data );
+            this.loading = false;
+            this.selected_member = data;
+            this.loadData();
+        }, error => {}
+    )
   }
     public updateMembersComponent() {
-        this.membersService.getMembersData();
+      this.loading = true;
+      this.membersService.getSingleMembersData(this.selected_member.id);
+        // this.membersService.getMembersData();
     }
+
+    public processUpdateMembers(data){
+        this.selected_member_child = data;
+    }
+
     public panel1_status(status: boolean) {
         if (status) {
             this.panel2 = false;
@@ -133,10 +155,17 @@ export class EditMemberDialogComponent implements OnInit, AfterViewInit {
             this.panel4 = false;
         }
     }
+
   public fileUploadEvent(event) {
     this.file_upload_event = event.srcElement.files;
   }
+
   public  updateMemberInfo(){
+      if (this.file_upload_event && this.file_upload_event.length > 0) {
+          this.selected_member.image_file = this.file_upload_event[0];
+          this.selected_member.image_file_name = this.file_upload_event[0].name;
+      }
+
       this.loading = true;
       this.selected_member.photo_url =  this.image;
       this.membersService.updateMember(this.selected_member).subscribe(
@@ -215,9 +244,16 @@ export class EditMemberDialogComponent implements OnInit, AfterViewInit {
         );
     }
     public  updatePreviousChurchInfo() {
+
+        if (this.file_upload_event && this.file_upload_event.length > 0) {
+            this.new_member_previous_church_info.image_file = this.file_upload_event[0];
+            this.new_member_previous_church_info.image_file_name = this.file_upload_event[0].name;
+        }
          this.loading = true;
-        this.selected_member.member_previous_church.member_id = this.selected_member.id;
-        this.membersService.updatePreviousChurchInfo(this.selected_member.member_previous_church).subscribe(
+
+         this.new_member_previous_church_info.member_id = this.selected_member.id;
+        // this.selected_member.member_previous_church.member_id = this.selected_member.id;
+        this.membersService.updatePreviousChurchInfo(this.new_member_previous_church_info).subscribe(
             data => {this.updateMembersComponent(); this.loading = false;
                 swal(
                     {
@@ -427,5 +463,44 @@ export class EditMemberDialogComponent implements OnInit, AfterViewInit {
     public cancel() {
         this.dialogRef.close();
     }
+
+
+
+    public addNewChild(): void {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = false;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = '800px';
+        dialogConfig.data = new Children();
+        const dialogRef = this.dialog.open(NewMemberChildComponent, dialogConfig);
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.loading = true;
+                result.member_id = this.selected_member.id;
+                this.membersService.addNewChildInfo(result).subscribe(
+                    data => {this.updateMembersComponent();
+                    this.loading = false;
+                        swal(
+                            {
+                                title: 'Added!',
+                                text: 'Child Added Successfully.',
+                                type: 'success',
+                                confirmButtonColor: '#DD6B55'
+                            })
+                    },
+                    erro => {
+                        swal({
+                            title: 'Whoops! Unable to Add Child',
+                            text: erro.error.message,
+                            animation: true,
+                            confirmButtonColor: '#DD6B55',
+                            customClass: 'animated tada'
+                        });
+                        this.loading = false; }
+                );
+            }
+        });
+    }
+
 
 }

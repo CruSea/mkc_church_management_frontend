@@ -10,6 +10,7 @@ import {Spouse} from "../members/spouse-info.objects";
 })
 export class MembersService {
   public PaginatedMembersEmitter = new EventEmitter<PaginatedMembers>();
+  public selected_member_emitter = new EventEmitter<Member>();
   // public MemberRoleListEmitter = new EventEmitter<UserRole[]>();
   constructor(private httpService: HttpRequestService, private authService: AuthService) { }
 
@@ -50,6 +51,25 @@ export class MembersService {
                 error => { console.log(error); },
             );
     }
+
+    public getSingleMembersData(member_id) {
+      console.log("Getting data for " + member_id);
+       this.httpService.sendGetRequest('member/' + member_id +  '?token=' + this.authService.getUserToken()).subscribe(
+           data => {
+               this.processGetSingleMember(data);
+           },
+           error => {
+
+           }
+       );
+    }
+
+    public processGetSingleMember(data){
+      if(data && data.result){
+          this.selected_member_emitter.emit(data.result);
+      }
+    }
+
 
     public getPaginatedSearchMembersNotInTeam(searchText: string ) {
         return this.httpService.sendGetRequest('search_members_not_in_team?team_id=' + this.authService.getSelectedTeam() + '&search=' +  searchText + '&token=' + this.authService.getUserToken())
@@ -155,6 +175,7 @@ export class MembersService {
         const new_header = new Headers();
         return this.httpService.sendPostRequest('member_children?token=' + this.authService.getUserToken(), child_data, new_header);
     }
+
   public addPreviousChurchInfo(church_data: MemberPreviousChurch) {
         const new_header = new Headers();
       const formData: FormData = new FormData();
@@ -167,10 +188,55 @@ export class MembersService {
       formData.append('image_file', church_data.image_file, church_data.image_file_name);
         return this.httpService.sendPostRequest('member_previous_church_admin?token=' + this.authService.getUserToken(), formData, new_header);
     }
+
   public updateMember(member_data: Member) {
-    const new_header = new Headers();
-    return this.httpService.sendPostRequest('member_update?token=' + this.authService.getUserToken(), member_data, new_header);
-  }
+      const new_header = new Headers();
+      const formData: FormData = new FormData();
+      formData.append('id', member_data.id + '');
+      formData.append('full_name', member_data.full_name);
+      formData.append('photo_url', member_data.photo_url);
+      formData.append('city', member_data.city);
+      formData.append('sub_city', member_data.sub_city);
+      formData.append('wereda', member_data.wereda);
+      formData.append('house_number', member_data.house_number);
+      formData.append('baptized_church', member_data.baptized_church);
+      formData.append('baptized_date', member_data.baptized_date);
+      formData.append('is_baptized', member_data.is_baptized);
+      formData.append('church_group_place', member_data.church_group_place);
+      formData.append('birth_place', member_data.birth_place);
+      formData.append('emergency_contact_name', member_data.emergency_contact_name);
+      formData.append('emergency_contact_phone', member_data.emergency_contact_phone);
+      formData.append('emergency_contact_subcity', member_data.emergency_contact_subcity);
+      formData.append('emergency_contact_house_no', member_data.emergency_contact_house_no);
+      formData.append('phone_cell', member_data.phone_cell);
+      formData.append('phone_work', member_data.phone_work);
+      formData.append('phone_home', member_data.phone_home);
+      formData.append('email', member_data.email);
+      formData.append('birth_day', member_data.birth_day);
+      formData.append('occupation', member_data.occupation);
+      formData.append('education_level', member_data.education_level);
+      formData.append('employment_position', member_data.employment_position);
+      formData.append('gender', member_data.gender);
+      formData.append('nationality', member_data.nationality);
+      formData.append('marital_status', member_data.marital_status);
+      formData.append('address', member_data.address);
+      formData.append('salvation_date', member_data.salvation_date);
+      formData.append('salvation_church', member_data.salvation_church);
+
+      if(member_data.have_family_fellowship){
+          formData.append('have_family_fellowship', '1');
+      }
+      else{
+          formData.append('have_family_fellowship', '0');
+      }
+
+      if (member_data.image_file != null) {
+          formData.append('image_file', member_data.image_file, member_data.image_file_name);
+      }
+    return this.httpService.sendPostRequest('member_update?token=' + this.authService.getUserToken(), formData, new_header);
+
+
+    }
   public updateSpouseInfo(member_data: Spouse) {
     const new_header = new Headers();
     return this.httpService.sendPutRequest('member_spouse_info?token=' + this.authService.getUserToken(), member_data, new_header);
@@ -179,10 +245,31 @@ export class MembersService {
     const new_header = new Headers();
     return this.httpService.sendPutRequest('member_children_info?token=' + this.authService.getUserToken(), member_data, new_header);
   }
-    public updatePreviousChurchInfo(member_data: MemberPreviousChurch) {
+
+  public updatePreviousChurchInfo(member_data: MemberPreviousChurch) {
+    // const new_header = new Headers();
+    // return this.httpService.sendPutRequest('member_previous_church_update?token=' + this.authService.getUserToken(), member_data, new_header);
+
     const new_header = new Headers();
-    return this.httpService.sendPutRequest('member_previous_church_update?token=' + this.authService.getUserToken(), member_data, new_header);
-  }
+    const formData: FormData = new FormData();
+    console.log('Uploading Playlist ...');
+    formData.append('id', '' + member_data.id);
+    formData.append('member_id', '' + member_data.member_id);
+    formData.append('church_name', member_data.church_name);
+    formData.append('leaving_reason', member_data.leaving_reason);
+    formData.append('was_member', member_data.was_member);
+    formData.append('duration', member_data.duration);
+
+
+      if (member_data.image_file != null) {
+          formData.append('image_file', member_data.image_file, member_data.image_file_name);
+
+      }
+
+
+      return this.httpService.sendPostRequest('member_previous_church_update_2?token=' + this.authService.getUserToken(), formData, new_header);
+
+    }
   // public changeUserStatus(member_data: Member) {
   //   const new_header = new Headers();
   //   console.log(member_data);
